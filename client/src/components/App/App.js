@@ -1,5 +1,5 @@
 import './App.css';
-
+import Classlist from '../Classes/class.list';
 function App() {
   return (
     <div className="App">
@@ -8,6 +8,7 @@ function App() {
          Begin App React + Nodejs
        </p>
       </header>
+     <Classlist></Classlist>
     </div>
   );
 }

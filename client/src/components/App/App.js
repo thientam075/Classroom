@@ -5,6 +5,7 @@ import {React, useState} from 'react';
 import Classform from '../Classes/class.form';
 function App() {
   const [handleClose, sethandleClose] = useState(true);
+  const [isCreate, setIsCreate] = useState(true);
   function onHandleChange(){
     sethandleClose(!handleClose);
   }
@@ -16,6 +17,7 @@ function App() {
         <Classform 
           handleClose= {handleClose}
           handleChange = {onHandleChange}
+          isCreate = {isCreate}
         />
         </div>
         <Classlist/>

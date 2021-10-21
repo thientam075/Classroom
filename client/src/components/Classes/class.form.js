@@ -1,6 +1,6 @@
 import { TextField, Typography, Button, Grid, Box } from "@mui/material";
 import { useState } from "react";
-function Classform({ handleClose, handleChange }) {
+function Classform({ handleClose, handleChange, isCreate }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -10,7 +10,41 @@ function Classform({ handleClose, handleChange }) {
   };
 
   // Function event handlers
+  function Createform(){
+    return (
+      <Grid item xs={6} sm={12}>
+            <TextField
+              autoComplete="given-name"
+              name="title"
+              required
+              fullWidth
+              id="title"
+              label="Title"
+              autoFocus
+              onChange={onHandleChange}
+              value={handleClose ? "" : title}
+            />
+          </Grid>
+    );
+  };
 
+  function Updateform(){
+    return (
+      <Grid item xs={6} sm={12}>
+            <TextField
+              autoComplete="given-name"
+              name="title"
+              required
+              fullWidth
+              id="title"
+              label="Title"
+              autoFocus
+              onChange={onHandleChange}
+              value={handleClose ? "" : title}
+            />
+          </Grid>
+    );
+  };
   const fetchData = async (title, description) => {
     await fetch("http://localhost:8080/classes", {
       method: 'POST',
@@ -54,23 +88,11 @@ function Classform({ handleClose, handleChange }) {
       className="class-form"
     >
       <Typography component="h1" variant="h5">
-        Create New Class
+        {isCreate ? "Create new Class" : "Update Class"}
       </Typography>
       <Box component="form" noValidate onSubmit={onHandleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
-          <Grid item xs={6} sm={12}>
-            <TextField
-              autoComplete="given-name"
-              name="title"
-              required
-              fullWidth
-              id="title"
-              label="Title"
-              autoFocus
-              onChange={onHandleChange}
-              value={handleClose ? "" : title}
-            />
-          </Grid>
+          {isCreate ? <Createform /> : <Updateform />}
           <Grid item xs={6} sm={12}>
             <TextField
               required

@@ -28,14 +28,15 @@ function Classlist() {
     return <div>Loading...</div>;
   } else {
     return (
-      <Container>
-        <Grid container>
+      <Container sx={{ py: 8 }} maxWidth="lg">
+        <Grid container spacing={4}>
             {classes.map((item) => (
-              <Grid key={item.id}>
+              <Grid key={item.id} xs={3} md={3} sm= {6} item>
               <ClassCard 
             id = {item.id} 
             title = {item.title} 
-            description = {item.description}/>
+            description = {item.description}
+            />
               </Grid>
             ))}
         </Grid>

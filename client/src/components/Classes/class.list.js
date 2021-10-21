@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-
-
+import {  Grid, Container } from "@mui/material";
+import ClassCard from "./class.card";
 function Classlist() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+  const [classes, setClasses] = useState([]);
   useEffect(() => {
     fetch("http://localhost:8080/classes")
       .then((res) => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
-          setItems(result);
+          setClasses(result);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -28,13 +28,18 @@ function Classlist() {
     return <div>Loading...</div>;
   } else {
     return (
-      <ul>
-        {items.map((item) => (
-          <li key={item.id}>
-            {item.className}
-          </li>
-        ))}
-      </ul>
+      <Container>
+        <Grid container>
+            {classes.map((item) => (
+              <Grid key={item.id}>
+              <ClassCard 
+            id = {item.id} 
+            title = {item.title} 
+            description = {item.description}/>
+              </Grid>
+            ))}
+        </Grid>
+      </Container>
     );
   }
 }

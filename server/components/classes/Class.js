@@ -9,10 +9,6 @@ function validIDparams(req, res, next) {
   if (!isNaN(req.params.id)) return next();
   next(createError(404, "Invalid ID"));
 }
-function validIDbody(req, res, next) {
-  if (!isNaN(req.body.id)) return next();
-  next(createError(404, "Invalid ID"));
-}
 
 // Router
 router.get("/", function (req, res, next) {
@@ -29,16 +25,13 @@ router.get("/:id", validIDparams, function (req, res, next) {
     }
   });
 });
-router.post("/", validIDbody, function (req, res, next) {
-  if (!IsIDexists(req.body.id)) {
+router.post("/", function (req, res, next) {
+  console.log(req.body);
     queries.createOne(req.body).then((classroom) => {
       res.json({
         message: "Classroom created successfully",
       });
     });
-  } else {
-    next(createError(409, "ID already exist"));
-  }
 });
 router.put("/:id", validIDparams, function (req, res, next) {
   queries.updateOne(req.body).then((classroom) => {
